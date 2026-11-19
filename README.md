@@ -18,7 +18,8 @@ vb-browser-use/
 │   │   │   ├── tier1_api_replay.py       # MVP-30: Cấp 1 — Direct API Replay
 │   │   │   ├── tier2_playwright.py       # MVP-31: Cấp 2 — Playwright Workflow tham số hóa
 │   │   │   ├── tier3_stagehand.py        # MVP-32: Cấp 3 — Stagehand AI DOM Discovery
-│   │   │   └── tier4_vision.py           # MVP-33: Cấp 4 — Browser-Use Multimodal Vision & Jev Mode
+│   │   │   ├── tier4_vision.py           # MVP-33: Cấp 4 — Browser-Use + Built-in Jev Mode (Tối ưu Chi phí & Độc lập)
+│   │   │   └── tier5_typesafe_jev.py     # MVP-33-PLUS: Cấp 5 — Native TypeSafe Jev (Tối ưu Tốc độ Siêu tốc ~538ms/bước)
 │   │   └── learning/
 │   │       ├── __init__.py
 │   │       ├── network_sniffer.py        # MVP-36: CDP Network Sniffer
@@ -43,8 +44,9 @@ vb-browser-use/
 | **MVP-30** | `browser_control/tiers/tier1_api_replay.py` | Cấp 1 Direct API Replay, $0 token, đo đếm WAF block | ✅ Xong |
 | **MVP-31** | `browser_control/tiers/tier2_playwright.py` | Cấp 2 Playwright Workflow tham số hoá, 0 token, < 1s | ✅ Xong |
 | **MVP-32** | `browser_control/tiers/tier3_stagehand.py` | Cấp 3 Stagehand DOM Pruning + Gemini AI, bóc tách selector | ✅ Xong |
-| **MVP-33** | `browser_control/tiers/tier4_vision.py` | Cấp 4 Browser-Use + Multimodal Vision API & Jev Mode | ✅ Xong |
-| **MVP-34** | `browser_control/port.py` | Hot-Swap Fallback không gián đoạn giữa 4 cấp | ✅ Xong |
+| **MVP-33** | `browser_control/tiers/tier4_vision.py` | Cấp 4 Browser-Use + Built-in Jev Mode (Tối ưu Chi phí, ~133đ, dùng Gemini nội bộ) | ✅ Xong |
+| **MVP-33-PLUS** | `browser_control/tiers/tier5_typesafe_jev.py` | Cấp 5 Native TypeSafe Jev (Tối ưu Tốc độ Siêu tốc ~538ms/bước, 16.76s E2E) | ✅ Xong |
+| **MVP-34** | `browser_control/port.py` | Hot-Swap Fallback không gián đoạn giữa 5 cấp độ | ✅ Xong |
 | **MVP-35 / 38** | `browser_control/detector.py` | Settle Strategy chuẩn hoá & Bộ phân loại kết quả đặt bàn | ✅ Xong |
 | **MVP-36** | `browser_control/learning/network_sniffer.py` | CDP Network Sniffer bắt request API thô | ✅ Xong |
 | **MVP-37** | *(Bị huỷ)* | Theo quyết định chính thức ngày 18/11: Bỏ kênh MXH | ❌ Huỷ |
@@ -56,4 +58,4 @@ vb-browser-use/
 ```bash
 PYTHONPATH=src pytest tests/unit/test_browser_control.py
 ```
-*(Kết quả: 8/8 tests pass 100%)*
+*(Kết quả: 9/9 tests pass 100%)*

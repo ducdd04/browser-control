@@ -14,10 +14,11 @@ import time
 
 
 class Tier(str, Enum):
-    TIER1_API_REPLAY = "tier1_api_replay"      # Cấp 1: Direct API Replay
-    TIER2_PLAYWRIGHT = "tier2_playwright"      # Cấp 2: Playwright Workflow tham số hóa
-    TIER3_STAGEHAND = "tier3_stagehand"        # Cấp 3: Stagehand AI DOM Semantic
-    TIER4_VISION = "tier4_vision"              # Cấp 4: Browser-Use + Multimodal Vision API
+    TIER1_API_REPLAY = "tier1_api_replay"          # Cấp 1: Direct API Replay (0đ, < 0.5s)
+    TIER2_PLAYWRIGHT = "tier2_playwright"          # Cấp 2: Playwright Workflow tham số hóa (0đ, < 1s)
+    TIER3_STAGEHAND = "tier3_stagehand"            # Cấp 3: Stagehand AI DOM Semantic (~18đ, 11s)
+    TIER4_VISION = "tier4_vision"                  # Cấp 4: Browser-Use + Gemini (Tối ưu Chi phí & Độc lập API, ~133đ)
+    TIER5_TYPESAFE_JEV = "tier5_typesafe_jev"      # Cấp 5: Native TypeSafe Jev (Tối ưu Tốc độ Siêu tốc ~538ms/bước, 16s)
 
 
 @dataclass
@@ -94,6 +95,7 @@ class AdaptiveFallbackOrchestrator:
             Tier.TIER2_PLAYWRIGHT,
             Tier.TIER3_STAGEHAND,
             Tier.TIER4_VISION,
+            Tier.TIER5_TYPESAFE_JEV,
         ]
         start_index = tiers_order.index(initial_tier) if initial_tier in tiers_order else 1
         t_start = time.perf_counter()

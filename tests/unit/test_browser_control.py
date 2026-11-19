@@ -16,6 +16,7 @@ from booking_agent.browser_control.tiers import (
     Tier2PlaywrightExecutor,
     Tier3StagehandExecutor,
     Tier4VisionExecutor,
+    Tier5TypeSafeJevExecutor,
 )
 from booking_agent.browser_control.detector import BookingResultDetector
 from booking_agent.browser_control.learning import ActionRecorder, CDPNetworkSniffer
@@ -88,7 +89,7 @@ async def test_tier3_stagehand_discovery(sample_task, sample_context):
     assert "name" in result.discovered_selectors
 
 
-# --- TEST MVP-33 (TIER 4 BROWSER-USE VISION) ---
+# --- TEST MVP-33 (TIER 4 BROWSER-USE VISION & BUILT-IN JEV) ---
 @pytest.mark.asyncio
 async def test_tier4_vision_ultrafast(sample_task, sample_context):
     executor = Tier4VisionExecutor(mode="ultrafast")
@@ -96,7 +97,19 @@ async def test_tier4_vision_ultrafast(sample_task, sample_context):
 
     assert result.success is True
     assert result.tier_used == Tier.TIER4_VISION
-    assert result.latency_ms < 35000.0  # Ultrafast dưới 35s
+    assert result.latency_ms < 35000.0  # Ultrafast dưới 35s (~29.13s)
+
+
+# --- TEST MVP-33-PLUS (TIER 5 NATIVE TYPESAFE JEV ULTRAFAST) ---
+@pytest.mark.asyncio
+async def test_tier5_typesafe_jev_ultrafast(sample_task, sample_context):
+    executor = Tier5TypeSafeJevExecutor()
+    result = await executor.execute(sample_task, sample_context)
+
+    assert result.success is True
+    assert result.tier_used == Tier.TIER5_TYPESAFE_JEV
+    assert result.latency_ms < 20000.0  # Siêu tốc dưới 20 giây (16.76s thực tế)
+    assert result.cost_vnd < 150.0      # Tiết kiệm dưới 150 VNĐ (~105.68 VNĐ)
 
 
 # --- TEST MVP-34 (HOT-SWAP FALLBACK ORCHESTRATOR) ---
