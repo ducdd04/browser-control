@@ -13,15 +13,8 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 # ── Các selector phổ biến cho từng loại captcha ────────────────────────
-# Thêm/sửa selector tùy website cụ thể
+# Ưu tiên kiểm tra widget/iframe đặc thù trước thẻ <img> tổng quát
 CAPTCHA_SELECTORS: dict[CaptchaType, list[str]] = {
-    CaptchaType.TEXT_OCR: [
-        'img.captcha-image',
-        'img[alt*="captcha"]',
-        'img[src*="captcha"]',
-        '#captcha-img',
-        '.captcha img',
-    ],
     CaptchaType.IMAGE_GRID: [
         'iframe[src*="recaptcha"]',
         'iframe[src*="hcaptcha"]',
@@ -36,6 +29,13 @@ CAPTCHA_SELECTORS: dict[CaptchaType, list[str]] = {
     CaptchaType.IMAGE_CLICK: [
         '.click-captcha',
         '.geetest_item_img',
+    ],
+    CaptchaType.TEXT_OCR: [
+        'img.captcha-image',
+        '#captcha-img',
+        '.captcha img',
+        'img[alt*="captcha" i]:not([alt*="logo" i]):not([src*="logo" i])',
+        'img[src*="captcha" i]:not([src*="logo" i]):not([alt*="logo" i])',
     ],
 }
 

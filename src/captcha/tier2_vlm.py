@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 VLM_CONFIG = {
     "base_url": "https://vllm.anm05.com",   # Base URL của VLM API
     "model": "qwen-3.6-35b-a3b",            # Model name
-    "api_key": "sk-1ca0e61277cf6d63d758b6597d27602511aa48c22b",                           # ← Điền API key khi deploy
+    "api_key": "sk-1ca0e61277cf6d63d758b6597d27602511aa48c22b2f3936cde07406e7babeae",                           # ← Điền API key khi deploy
     "timeout": 30,                           # Timeout (giây)
     "max_tokens": 512,
 }
